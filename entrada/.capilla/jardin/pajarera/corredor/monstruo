@@ -1,0 +1,545 @@
+#!/bin/bash
+#
+# Si estás leyendo esto, has traspasado los límites y estás leyendo el código
+# que hace funcionar este juego.
+#
+#                                 ¡Felicidades!                               
+#
+# La curiosidad juega un papel fundamental en el aprendizaje de Linux, así que
+# prueba a leer este código y averiguar qué hace.
+#
+# En cualquier caso, para continuar jugando, déjate guiar por los pergaminos.
+# Si te quedas atascado, ve a GitHub y crea un issue. Estaremos encantados de
+# darte pistas.
+#
+
+gameover () {
+    cat << EOF > cadaver
+El cadáver de un aventurero yace en el suelo de las mazmorras. Entre sus
+pertenencias encuentras:
+
+${I}
+
+EOF
+    curr=`basename $PWD`
+    while [ "$curr" != "entrada" ]; do
+        pushd .. &> /dev/null
+        dirs -c
+        curr=`basename $PWD`
+    done
+    unset I
+    unset HP
+    $SHELL
+}
+roll() {
+    echo "Escribe un número:  "
+    read NUM
+    ALPHA=$RANDOM
+    OMEGA=$RANDOM
+    A=`echo $ALPHA | cut -b 1-2`
+    O=`echo $OMEGA | cut -b 1-2`
+    let "NUM=$ALPHA % $OMEGA"
+    MONSTER=$RANDOM
+    MONSTER=`echo $MONSTER | cut -b 1-2`
+    NUM=`echo $NUM | cut -b 1-2`
+    echo "El monstruo sacó un " $MONSTER
+    echo "Tú sacaste un " $NUM
+    resolve
+}
+
+resolve() {
+    if ! grep  --quiet --only-matching 'espada' <<< $I; then
+        cat << EOF
+¡No tienes una espada!
+
+Tus ataques serán menos efectivos.
+
+EOF
+        let NUM=NUM-10
+    fi
+    if [[ $MONSTER -eq $NUM ]]; then
+        cat << EOF
+Ambos repeléis los ataques del otro. Prueba de nuevo...
+
+EOF
+	roll
+    fi
+    
+    if [[ $MONSTER -lt $NUM ]]; then
+        cat << EOF
+¡Un golpe contundente! Has conseguido derrotar al monstruo.
+
+EOF
+        cat << EOF > tesoro
+#!/bin/bash
+if ! grep  --quiet --only-matching corona <<< \$I; then
+    cat << eof
+¡Has encontrado una **corona**! Añádela a tu inventario.
+
+eof
+
+else
+    echo "Ya has recogido este tesoro."
+fi 
+
+EOF
+        chmod +x tesoro
+        mv monstruo restos
+    else
+        cat << EOF
+
+Tu ataque rebota en la gruesa piel del monstruo.
+Recibes 5 puntos de daño. Réstalos a tus HP.
+
+let HP=HP-5
+
+EOF
+        let HP=HP-5
+        export HP
+        if [ "$HP" -le 0 ]; then
+            cat << EOF
+Has sido asesinado por el monstruo.
+
+¡FIN DEL JUEGO!
+
+EOF
+            gameover
+            exit 1
+        fi
+	roll
+    fi
+}
+
+if [ "$0" = "./restos" ]; then
+    cat << EOF
+Son los restos de una bestia repugnante. No hay nada de interés entre ellos.
+
+EOF
+    exit 0
+fi
+
+cat << EOF
+Una imponente bestia de tres patas, con la boca llena de colmillos, una cola
+espinosa, y 8 brazos, se tambalea hacia ti.
+
+Si tienes una espada, puedes atacar. De lo contrario, deberías correr.
+
+EOF
+printf "¿Quieres atacar? s/n  "
+read RESP
+
+if [ "$RESP" = "s" -o "$RESP" = "S" ];then
+    roll
+else
+    cat << EOF
+Sabiamente, das la vuelta y echas a correr. Haz cd al directorio anterior.
+
+EOF
+fi
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+##
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+
+#
+# Vaya, no ha funcionado.

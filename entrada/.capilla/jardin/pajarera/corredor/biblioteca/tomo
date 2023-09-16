@@ -1,0 +1,470 @@
+#!/bin/bash
+#
+# Si estás leyendo esto, has traspasado los límites y estás leyendo el código
+# que hace funcionar este juego.
+#
+#                                 ¡Felicidades!                               
+#
+# La curiosidad juega un papel fundamental en el aprendizaje de Linux, así que
+# prueba a leer este código y averiguar qué hace.
+#
+# En cualquier caso, para continuar jugando, déjate guiar por los pergaminos.
+# Si te quedas atascado, ve a GitHub y crea un issue. Estaremos encantados de
+# darte pistas.
+#
+
+random_page () {
+
+    # For each spell added, increase total_spells by one (1)
+    # So, the number of the spells will be 0 through n - 1.  If
+    # there are five spells in the tome, then they will be 
+    # numbered from 0 through 4.  The operation to choose the 
+    # current spell will pick a random number, 0 through n - 1.
+    # That spell will be displayed.
+    total_spells=6
+    curr_spell=$(( ${RANDOM} % ${total_spells} ))
+
+    case ${curr_spell} in
+        0)
+            cat << EOF
+
+¡Observa el mundo en color!
+
+Si tienes una terminal moderna, con soporte para color, ¡puedes ver la salida
+del comando ls en color! Este comando seguirá siendo válido si no tienes una
+terminal a color, solo que no verás los colores. Prueba esto:
+
+alias ls='ls -F --color=auto'
+
+Ahora, al ejecutar el comando "ls" a secas, las habitaciones (directorios),
+los pergaminos (ficheros de texto) y los encuentros (ficheros ejecutables)
+deberían tener colores diferentes. Dependiendo de la variable \$LS_COLORS,
+muchos otros ficheros podrán tener también colores diferentes.
+
+Puedes leer más sobre los colores consultando el manual de "dircolors". Para
+ello, prueba este hechizo:
+
+man dircolors
+
+Dentro del manual, puedes pulsar 'q' para salir de él.
+
+EOF
+        ;;
+        1)
+            cat << EOF
+
+¡Recuerda dónde has estado!
+
+En lugar de usar "cd <habitación>" y "cd .." para navegar por las mazmorras,
+puedes llevar un registro de las habitaciones que has visitado usando "pushd"
+y "popd". "pushd" añade la habitación que le pases como argumento a la pila de
+habitaciones (directorios). Úsalo así:
+
+pushd <habitación>
+
+Los signos de mayor y menor significan que debes especificar la habitación
+(directorio), pero sin escribir los signos como tal. Para ver la pila de
+habitaciones actual, escribe el siguiente comando:
+
+dirs
+
+Esto mostrará la lista de directorios en la pila. La estructura de datos se
+conoce como pila, porque solo puedes añadir o eliminar elementos desde la
+parte superior de la pila; también se conoce como estructura de datos LIFO
+(last in, first out). Para eliminar la habitación superior (directorio) de la
+pila, y cambiar a la nueva habitación en la parte superior de la pila, usa
+"popd":
+
+popd
+
+Esto eliminará el elemento superior de la pila ("pop"), y cambiará al
+siguiente directorio en la pila.
+
+Veamos un ejemplo. Estás en una habitación (directorio) llamada
+~/bashcrawl/entrada/explanada/, con las siguientes habitaciones:
+
+cementerio/ prision/ mazmorra/
+
+Para entrar al cementerio, y añadirlo a la pila de directorios, usa esto:
+
+pushd cementerio
+
+Ahora, la pila de directorios (salida del comando "dirs") muestra esto:
+
+~/bashcrawl/entrada/explanada/cementerio ~/bashcrawl/entrada/explanada
+
+...y tu directorio actual (directorio de trabajo actual, almacenado en la
+variable \$PWD) es el cementerio. Para volver a la explanada, ejecuta "popd".
+La pila de directorios volverá a ~/bashcrawl/entrada/explanada, y tu
+directorio actual será ese directorio. Puedes mezclar "pushd" con "cd", y solo
+los directorios que añadas con "pushd" estarán en la pila. Esto es útil para
+volver rápidamente a otro directorio después de explorar otras partes de la
+mazmorra.
+
+¡Buena suerte!
+
+EOF
+        ;;
+    2)
+        [ -f ../monstruo ] && monster="monstruo" || monster="restos"
+        cat << EOF
+
+¡Mapea toda la mazmorra!
+
+Puedes ver la estructura de toda la mazmorra usando el comando "tree". Es
+posible que tengas que instalarlo; consulta el gestor de paquetes de tu
+sistema operativo para más detalles. Si estás leyendo esto desde la
+biblioteca, tu ruta relativa actual debería ser:
+
+entrada/capilla/jardin/pajarera/corredor/biblioteca
+
+Si ejecutas este comando desde la biblioteca:
+
+tree -F ..
+
+Deberías poder ver esto:
+
+..
+├── libreria/
+│   ├── pergamino
+│   └── tomo*
+└── ${monster}*
+
+El comando "tree" comparte muchas opciones con el comando "ls", como los
+colores y la visualización de ficheros ocultos. ¡Vuelve a la entrada y
+pruébalo!
+
+EOF
+        ;;
+    3)
+        cat << EOF
+
+¡Usa el modo emacs para navegar por la línea de comandos (CLI)!
+
+Por defecto, Bash tiene activado el modo emacs. Si no lo tienes activado,
+puedes ejecutar esto en tu terminal:
+
+set -o emacs
+
+Esto te permite mover el cursor por la línea de comandos con más rapidez que
+usando las teclas de flechas. Estas son algunas de las combinaciones de teclas
+que puedes usar:
+
+- Ctrl-a:  mueve el cursor al principio de la línea
+- Ctrl-e:  mueve el cursor al final de la línea
+- Meta-b:  (o Alt-b), retrocede una palabra
+- Meta-f:  (o Alt-f), avanza una palabra
+- Ctrl-u:  Corta desde el cursor hasta el principio de la línea
+- Ctrl-k:  Corta desde el cursor hasta el final de la línea
+- Ctrl-w:  Corta la palabra anterior al cursor
+- Ctrl-y:  Pega el texto cortado con Ctrl-u, Ctrl-k, o Ctrl-w
+- Ctrl-_:  Deshace el último corte (puede que no funcione en todas las
+           terminales)
+
+¡Ahora puedes moverte por la línea de comandos como un profesional!
+
+EOF
+        ;;
+    4)
+        cat << EOF
+
+¡Usa el multiplexor de terminales tmux!
+
+tmux es un multiplexor de terminales, que permite al usuario gestionar
+sesiones, ventanas y paneles dentro de la terminal. El principal motivo para
+utilizar un multiplexor de terminales es que las shells en cada uno de sus
+paneles son persistentes, lo cual implica que puedes desacoplar y volver a
+acoplar los paneles, ventanas y sesiones de tmux sin perder tu trabajo o el
+punto en el que estabas. Incluso puedes usar tmux para compartir la terminal
+con otro usuario (que esté usando un ordenador diferente al tuyo), si los
+haces conectarse a la misma sesión.
+
+tmux es un paquete independiente, y puede que no esté instalado por defecto.
+Consulta el manual del gestor de paquetes de tu sistema operativo para más
+detalles sobre cómo instalar tmux.
+
+Puedes iniciar tmux con el siguiente comando:
+
+tmux new-session -s <nombre_sesion>
+
+Aquí, <nombre_sesion> puede ser reemplazado por cualquier nombre que quieras
+darle a la sesión. Si no quieres darle un nombre específico, puedes omitir
+"-s <nombre_sesion>".
+
+Por defecto, tmux creará la nueva sesión con una ventana, y esa ventana tendrá
+un único panel. Cada panel creado por tmux es una pseudoterminal, que ejecuta
+su propia shell independiente. Habrá una barra de estado en la parte inferior
+del panel de tmux, con el nombre de la sesión (si tiene alguno) y las ventanas
+numeradas.
+
+Para interactuar con tmux dentro de un panel de tmux, debes pasar la tecla de
+prefijo, que por defecto es Ctrl-b. A continuación, puedes pulsar otra tecla
+para que tmux realice una acción. Un ejemplo es dividir el panel de tmux de
+forma vertical, con una línea horizontal que separa el panel antiguo del nuevo
+panel que se abre en la parte inferior. Para hacer esto, escribe lo siguiente:
+
+Ctrl-b, después %
+
+En lugar de %, puedes escribir " para dividir el panel de forma horizontal,
+con una línea vertical que separa los dos paneles. A continuación, puedes
+escribir : para entrar en la shell de tmux, y ejecutar comandos de tmux.
+Consulta el manual de tmux para más detalles:
+
+man tmux
+
+Para desacoplar la sesión de tmux, puedes pulsar las siguientes teclas:
+
+Ctrl-b, después d
+
+A posteriori, incluso desde otro ordenador (por ejemplo, conectándose al
+ordenador que ejecuta tmux a través de SSH), puedes volver a acoplar la sesión
+de tmux con el siguiente comando:
+
+tmux attach -t <nombre_sesion>
+
+tmux tiene su propio lenguaje de configuración; esta se almacena por defecto
+en ~/.tmux.conf. Puedes configurar atajos de teclado en dicho fichero, y así
+hacer que tmux se comporte como tú quieras. ¡El límite es tu imaginación!
+
+EOF
+        ;;
+    5)
+        cat << EOF
+
+¡Aprende los fundamentos de la expansión de llaves y los bucles for!
+
+Supongamos que tienes varios ficheros:
+
+fichero00
+fichero01
+fichero02
+fichero03
+...
+fichero97
+fichero98
+fichero99
+
+Puedes recorrerlos con un bucle, y realizar cualquier operación sobre ellos.
+Por ejemplo, supongamos que quieres comprimir cada fichero individualmente,
+sin juntarlos en un único fichero tar (o ZIP). En lugar de ejecutar el
+comando pertinente 100 veces, una por cada fichero, puedes usar un bucle for,
+y operar sobre cada fichero individualmente.
+
+Una forma de conseguirlo es mediante la expansión de llaves. En Bash, en lugar
+de escribir lo siguiente:
+
+gzip fichero00
+gzip fichero01
+gzip fichero02
+gzip fichero03
+...
+gzip fichero97
+gzip fichero98
+gzip fichero99
+
+Puedes hacer lo mismo, y de forma más eficiente, usando la expansión de
+llaves:
+
+gzip fichero{00..99}
+
+También puedes usar la expansión de llaves para crear un bucle for:
+
+for i in {00..99}; do
+    gzip fichero\${i}
+done
+
+Incluso puedes escribir el bucle for sin usar la expansión de llaves:
+
+for fichero in fichero*; do
+    gzip \${fichero}
+done
+
+Todos estos comandos terminan haciendo lo mismo: comprimir cada fichero con
+gzip de forma individual.
+
+EOF
+        ;;
+        # Añade nuevos hechizos aquí
+    esac
+}
+
+cat << EOF
+
+Ves un gran tomo sobre la mesa, abierto por la mitad.
+
+EOF
+
+printf "¿Quieres leerlo? s/n  "
+read RESP
+
+if [ "${RESP}" = "s" -o "${RESP}" = "S" ]; then
+    cat << EOF
+
+Parece ser un libro de hechizos. Aquí está el primero:
+
+EOF
+
+    while [ "${RESP}" = 's' -o "${RESP}" = 'S' ]; do
+        random_page
+    
+        printf "¿Quieres leer otro hechizo? s/n  "
+        read RESP
+    done 
+fi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Vaya, no ha funcionado.
+# Recuerda que los ficheros que terminan en * son aplicaciones.
+# Prueba esto:
+#
+# ./tomo

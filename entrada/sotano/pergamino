@@ -1,0 +1,20 @@
+
+# Las apariencias pueden engañar en este lugar.
+# Es difícil distinguir qué es una puerta y qué es un objeto.
+#
+# Puedes perfeccionar tu hechizo mágico para ver mejor.
+# A partir de ahora, lanza el hechizo así:
+# 
+# ls -F
+# 
+# Los directorios (las habitaciones de estas catacumbas) terminan con el
+# símbolo /.
+# Los encuentros (programas) terminan con el símbolo *.
+#
+# Para evitar escribir `ls -F` continuamente, escribe:
+#
+# alias ls='ls -F'
+#
+# Esto se conoce como un alias de shell o de intérprete de comandos. De este
+# modo, cuando escribas ls, se ejecutará ls -F en su lugar. ¡Pruébalo!
+#

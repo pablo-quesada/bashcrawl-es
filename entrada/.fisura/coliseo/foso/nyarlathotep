@@ -1,0 +1,460 @@
+#!/bin/bash
+#
+# Si estás leyendo esto, has traspasado los límites y estás leyendo el código
+# que hace funcionar este juego.
+#
+#                                 ¡Felicidades!                               
+#
+# La curiosidad juega un papel fundamental en el aprendizaje de Linux, así que
+# prueba a leer este código y averiguar qué hace.
+#
+# En cualquier caso, para continuar jugando, déjate guiar por los pergaminos.
+# Si te quedas atascado, ve a GitHub y crea un issue. Estaremos encantados de
+# darte pistas.
+#
+
+roll() {
+    echo "Escribe un número:  "
+    read NUM
+    ALPHA=$RANDOM
+    OMEGA=$RANDOM
+    A=`echo $ALPHA | cut -b 1-2`
+    O=`echo $OMEGA | cut -b 1-2`
+    let "NUM=$ALPHA % $OMEGA"
+    MONSTER=$RANDOM
+    MONSTER=`echo $MONSTER | cut -b 1-2`
+    NUM=`echo $NUM | cut -b 1-2`
+
+    let "MONSTER=MONSTER+3"
+    
+    if [ ! -e tambor ]; then
+       let "MONSTER=MONSTER-2"
+    fi
+    
+    echo "El monstruo sacó un " $MONSTER
+    echo "Tú sacaste un " $NUM
+
+    if [[ -e mago-oscuro && -e luz-magica ]]; then
+	let "NUM=NUM+2"
+	echo "¡Bonificación +2 de Arnnisen el Gris!"
+    fi
+
+    if [[ -e ../../.bendicion ]]; then
+	let "NUM=NUM+2"
+	echo "¡Bonificación +2 de los magos POSIX!"
+    fi
+    resolve
+}
+
+gameover () {
+    cat << EOF > cadaver
+El cadáver de un aventurero yace en el suelo de las mazmorras. Entre sus
+pertenencias encuentras:
+
+${I}
+
+EOF
+    curr=`basename $PWD`
+    while [ "$curr" != "entrada" ]; do
+        pushd .. &> /dev/null
+        dirs -c
+        curr=`basename $PWD`
+    done
+    unset I
+    unset HP
+    $SHELL
+}
+
+flee () {
+    cat << EOF
+Intentas huir, pero no lo consigues. Pasas 1000 años como un siervo sin mente
+al servicio del caos reptante.
+
+Al despertar, puedes volver a intentar luchar por tu libertad.  
+
+EOF
+}
+
+resolve() {
+    if [[ $MONSTER -eq $NUM ]]; then
+        cat << EOF
+Esquivas un ataque, pero también fallas el tuyo.
+Lanza de nuevo....
+
+EOF
+	roll
+    fi
+    
+    if [[ $MONSTER -lt $NUM ]]; then
+        cat << EOF
+¡Un golpe contundente!
+¡Has conseguido derrotar al antiguo dios del caos.
+
+EOF
+       cat << EOF > tesoro
+#!/bin/bash
+if ! grep  --quiet --only-matching cabello <<< \$I; then
+    cat << eof
+¡Has encontrado un mechón del **cabello** de un dios! Añádelo a tu inventario.
+
+eof
+else 
+    echo "Ya has recogido este tesoro."
+fi
+
+EOF
+       chmod +x tesoro
+       cat << EOF > platino
+#!/bin/bash
+if ! grep  --quiet --only-matching brazalete <<< \$I; then
+    cat << eof
+Has encontrado un brazalete encantado de necromancia caótica. Añádelo a tu
+inventario.
+
+eof
+else
+    echo "Ya has recogido este tesoro."
+fi
+
+EOF
+        chmod +x platino
+        cat << EOF > final
+Has llegado al final del juego.
+Ahora conoces los fundamentos de Bash para usarlo en tu día a día.
+La práctica hace al maestro, así que asegúrate de usarlo con frecuencia.
+Para más consejos sobre Bash, visita opensource.com.
+
+¡Si te animas, esperamos que también contribuyas con tus propias mazmorras a
+Bashcrawl!
+
+EOF
+
+    else
+        cat << EOF
+Tu espada se balancea inútilmente en el aire.
+Recibes 10 puntos de daño. Resta esta cantidad a tu variable HP:
+
+let HP=HP-10
+
+EOF
+        let HP=HP-10
+        export HP
+        if [ "$HP" -le 0 ]; then
+            cat << EOF
+El antiguo dios del caos te consume el cuerpo y el alma. Has muerto.
+
+¡FIN DEL JUEGO!
+
+EOF
+            gameover
+            exit 1
+        fi
+	    roll
+    fi
+}
+
+cat << EOF
+En un abrir y cerrar de ojos, Nyarlathotep se impone ante ti.
+De sus manos emanan rayos necróticos negros, que hacen retorcerse tu mente.
+
+EOF
+printf "¿Estás armado? s/n  "
+read RESP
+
+if [ "$RESP" = "s" -o "$RESP" = "S" ]; then
+
+    if grep  --quiet --only-matching "espada" <<< $I; then
+        roll
+    else
+        cat << EOF
+¡Oh, no! ¡Has perdido tu espada!
+Nyarlathotep, el antiguo dios del caos, percibe tu debilidad.  
+
+EOF
+        flee
+    fi
+else
+    flee
+fi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Vaya, no ha funcionado.
+# Recuerda que los ficheros que terminan en * son aplicaciones.
+# Prueba esto:
+#
+# ./nyarlathotep
+#
+# Si no ves el * después del nombre del fichero, posiblemente te hayas
+# olvidado de usar ls -F

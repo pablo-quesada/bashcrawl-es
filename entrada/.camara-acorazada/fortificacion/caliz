@@ -1,0 +1,331 @@
+#!/bin/bash
+#
+# Si estás leyendo esto, has traspasado los límites y estás leyendo el código
+# que hace funcionar este juego.
+#
+#                                 ¡Felicidades!                               
+#
+# La curiosidad juega un papel fundamental en el aprendizaje de Linux, así que
+# prueba a leer este código y averiguar qué hace.
+#
+# En cualquier caso, para continuar jugando, déjate guiar por los pergaminos.
+# Si te quedas atascado, ve a GitHub y crea un issue. Estaremos encantados de
+# darte pistas.
+#
+
+if [[ -e orbe1 && -e orbe2 && -e orbe3 ]]; then
+    cat << EOF
+Has liberado la forma material del cáliz. Añade 'caliz' a tu inventario.
+
+EOF
+    exit
+else 
+    cat << EOF
+Intentas coger el cáliz que brilla tenuamente, pero tu mano lo atraviesa.
+
+EOF
+
+fi
+
+printf "¿Te has quedado sin ideas? ¿Necesitas una pista? s/n  "
+read RESP
+
+if [ "$RESP" = "s" -o "$RESP" = "S" ]; then
+    cat << EOF
+Prueba a buscar en opensource.com indicaciones sobre cómo copiar ficheros.
+
+EOF
+    printf "¿Todavía estás atascado? Te puedo dar la respuesta s/n  "
+    read RESP
+
+    if [ "$RESP" = "s" -o "$RESP" = "S" ]; then
+        cat << EOF
+El comando cp copia un fichero a otro. Prueba a ejecutar estos comandos:
+
+cp orbe1 orbe2
+cp orbe1 orbe3
+
+Y vuelve a ejecutar este script para confirmar que has hecho bien las copias.
+
+EOF
+    fi
+fi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Vaya, no ha funcionado.
+# Recuerda que los ficheros que terminan en * son aplicaciones.
+# Prueba esto:
+#
+# ./caliz

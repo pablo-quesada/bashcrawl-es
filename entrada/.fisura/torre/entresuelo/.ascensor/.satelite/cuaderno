@@ -1,0 +1,35 @@
+Este es el cuaderno de Thraal, Artífice del Reino de Nor.
+He estado estudiando las máquinas que yacen en este satélite.
+He descubierto un posible modo de combinar las diferentes partes para crear un
+golem, un *robot*, con el mismo hechizo que uso para ver señales y pergaminos
+en mi mundo natal.
+Todavía no lo he conseguido.
+Lo que sí sé es que, para darle vida al robot, al final debo lanzar el
+siguiente hechizo:
+
+    chmod +x robot
+
+He nombrado sus cuatro partes como alfa, beta, gamma, y delta; sin embargo, no
+es el orden correcto en que combinarlas. Tengo que encontrar el orden
+apropiado, y aplicarles el siguiente hechizo:
+
+    cat alfa beta gamma delta | base64 -d > robot
+
+Esta es la primera combinación que probé, pero me encontré con el siguiente
+error:  
+
+    base64:  invalid input
+
+He observado que algunas combinaciones no producen este error, pero el robot
+resultante sigue sin funcionar. He descubierto otro hechizo que analiza si el
+robot está montado correctamente:
+
+    sha256sum -c sha256sums
+
+Voy a probar todas las combinaciones y registrar la que funcione.
+
+    alfa beta delta gamma 
+    alfa delta bet
+
+Parece haber sangre seca en el cuaderno, y el resto de las páginas están en
+blanco.

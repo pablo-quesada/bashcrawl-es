@@ -1,0 +1,334 @@
+#!/bin/bash
+#
+# Si estás leyendo esto, has traspasado los límites y estás leyendo el código
+# que hace funcionar este juego.
+#
+#                                 ¡Felicidades!                               
+#
+# La curiosidad juega un papel fundamental en el aprendizaje de Linux, así que
+# prueba a leer este código y averiguar qué hace.
+#
+# En cualquier caso, para continuar jugando, déjate guiar por los pergaminos.
+# Si te quedas atascado, ve a GitHub y crea un issue. Estaremos encantados de
+# darte pistas.
+#
+
+ITEM=cristal
+
+if ! [ -f .bendicion ] ; then
+    printf "¿Tienes un cristal de hielo? s/n  "
+    read RESP
+
+    if [ "$RESP" = "s" -o "$RESP" = "S" ]; then
+        if grep  --quiet --only-matching "$ITEM" <<< "$I" ; then
+            cat << EOF
+Colocas el cristal de hielo entre los trozos de cristal.
+La espada que portas en tus manos se enfría, y sientes el poder de 1000
+ventiscas fluyendo a través de ella.
+
+No te olvides de quitar el cristal de tu inventario. Prueba a ejecutar este
+comando:
+
+export I=\$(sed 's/$ITEM,//' <<< \$I)
+EOF
+            touch .bendicion
+            exit 0
+        else
+            cat << EOF
+Revisas tu inventario, pero no hay nada que se parezca a un cristal.
+
+EOF
+        fi
+    fi
+    cat << EOF
+Te da la impresión de que los trozos de cristal buscan algo.
+Sea lo que sea, no lo has encontrado.
+
+Ten cuidado al cruzar esta habitación.
+
+EOF
+else
+    cat << EOF
+Ya has colocado el cristal de hielo entre los fragmentos de cristal.
+
+EOF
+fi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Vaya, no ha funcionado.
+# Recuerda que los ficheros que terminan en * son aplicaciones.
+# Prueba esto:
+#
+# ./cristales

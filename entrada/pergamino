@@ -1,0 +1,18 @@
+
+La oscuridad cubre estas catacumbas.
+No puedes ver más allá de unos pocos pasos.
+Conoces un hechizo mágico que revela los objetos en una habitación.
+
+Para ver en la oscuridad, escribe:    ls
+Para moverte, escribe:                cd <directorio>
+
+Prueba a explorar esta habitación.
+Después, avanza a una de las siguientes habitaciones.
+
+
+EJEMPLO:
+
+$ ls 
+$ cd sotano
+
+¡Recuerda lanzar ``ls`` cuando entres en la siguiente habitación!

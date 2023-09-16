@@ -1,0 +1,428 @@
+#!/bin/bash
+#
+# Si estás leyendo esto, has traspasado los límites y estás leyendo el código
+# que hace funcionar este juego.
+#
+#                                 ¡Felicidades!                               
+#
+# La curiosidad juega un papel fundamental en el aprendizaje de Linux, así que
+# prueba a leer este código y averiguar qué hace.
+#
+# En cualquier caso, para continuar jugando, déjate guiar por los pergaminos.
+# Si te quedas atascado, ve a GitHub y crea un issue. Estaremos encantados de
+# darte pistas.
+#
+
+gameover () {
+    cat << EOF > cadaver
+El cadáver de un aventurero yace en el suelo de las mazmorras. Entre sus
+pertenencias encuentras:
+
+$I
+
+EOF
+    curr=`basename $PWD`
+    while [ "$curr" != "entrada" ]; do
+        pushd .. &> /dev/null
+        dirs -c
+        curr=`basename $PWD`
+    done
+    unset I
+    unset HP
+    $SHELL
+}
+roll() {
+    printf "Escribe un número:  "
+    read NUM
+    ALPHA=$RANDOM
+    OMEGA=$RANDOM
+    A=`echo $ALPHA | cut -b 1-2`
+    O=`echo $OMEGA | cut -b 1-2`
+    let "NUM=$ALPHA % $OMEGA"
+    MONSTER=$RANDOM
+    MONSTER=`echo $MONSTER | cut -b 1-2`
+    NUM=`echo $NUM | cut -b 1-2`
+
+    echo "El monstruo sacó un " $MONSTER
+    echo "Tú sacaste un " $NUM
+    
+    if [ -e ../../../.bendicion ]; then
+	let "NUM=NUM+2"
+	echo "¡Bonificación +2 de un misterioso patrocinador invernal!"
+    fi
+}
+
+resolve() {
+    if [[ $MONSTER -eq $NUM ]]; then
+        cat << EOF
+Esquivas un ataque, pero también fallas el tuyo.
+Lanza de nuevo...
+
+EOF
+	    roll
+    fi
+    
+    if [[ $MONSTER -lt $NUM ]]; then
+        cat << EOF
+¡Un golpe contundente!
+Has conseguido derrotar al espíritu de un mago malvado.
+
+EOF
+        cat << EOF > tesoro
+#!/bin/bash
+if ! grep  --quiet --only-matching esmeralda <<< \$I; then
+    cat << eof
+¡Has encontrado una *esmeralda*! Añádela a tu inventario.
+
+eof
+else
+    cat << eof
+Ya has recogido este tesoro.
+
+eof
+fi
+EOF
+       chmod +x tesoro
+       cat << EOF > platino
+#!/bin/bash
+if ! grep  --quiet --only-matching platino <<< \$I; then
+    cat << eof
+¡Has encontrado un alijo de monedas de *platino*! Añádelo a tu inventario.
+
+eof
+else
+    cat << eof
+Ya has recogido este tesoro.
+
+eof
+
+fi
+EOF
+        chmod +x platino
+    else
+        cat << EOF
+Tu espada se balancea inútilmente en el aire.
+Recibes 5 puntos de daño. Resta esta cantidad a tu variable HP:
+
+let HP=HP-5
+
+EOF
+        let HP=HP-5
+        if [ "$HP" -le 0 ]; then
+            cat << EOF
+De repente te notas frío, y sientes cómo tus últimos alientos se escapan de tu
+cuerpo. Has sido asesinado por el fantasma de un mago malvado.
+
+¡FIN DEL JUEGO!
+
+EOF
+            gameover
+            exit 1
+        fi
+	    roll
+        resolve
+    fi
+}
+
+cat << EOF
+La habitación comienza a temblar, y una ráfaga de viento te golpea de la nada.
+Sientes que una presencia ha entrado en la habitación.
+El dolor que sientes repentinamente te hace saber que estás siendo atacado por
+una entidad fantasmal.
+
+Si tienes una espada, puedes atacar. De lo contrario, deberías correr.
+
+EOF
+printf "¿Quieres atacar? s/n  "
+read RESP
+
+if [ "$RESP" = "s" -o "$RESP" = "S" ];then
+    roll
+    resolve
+else
+    cat << EOF
+
+Sabia decisión, te das la vuelta y huyes. Sería buena idea volver a la
+anterior sala.
+
+EOF
+fi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Vaya, no ha funcionado.
+# Recuerda que los ficheros que terminan en * son aplicaciones.
+# Prueba esto:
+#
+# ./fantasma

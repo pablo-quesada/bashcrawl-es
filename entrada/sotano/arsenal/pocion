@@ -1,0 +1,336 @@
+#!/bin/bash
+#
+# Si estás leyendo esto, has traspasado los límites y estás leyendo el código
+# que hace funcionar este juego.
+#
+#                                 ¡Felicidades!                               
+#
+# La curiosidad juega un papel fundamental en el aprendizaje de Linux, así que
+# prueba a leer este código y averiguar qué hace.
+#
+# En cualquier caso, para continuar jugando, déjate guiar por los pergaminos.
+# Si te quedas atascado, ve a GitHub y crea un issue. Estaremos encantados de
+# darte pistas.
+#
+
+cat << EOF 
+Has encontrado una poción que contiene un líquido verde burbujeante. ¿Quieres
+beberla?  s/n  
+
+EOF
+read RESP
+
+if [ "$RESP" = "s" -o "$RESP" = "S" ]; then
+   cat << EOF 
+El sabor de una planta verde campestre inunda tu boca. Te sientes más cálido y
+fuerte.
+
+Crea una variable para contar tus puntos de salud (Health Points). Dispones de
+15 HP:
+
+export HP=15
+
+EOF
+else
+    cat << EOF
+No naciste ayer. Seguro que esta poción es venenosa.  
+
+Crea una variable para contar tus puntos de salud (Health Points). Dispones de
+10 HP:
+
+export HP=10
+
+EOF
+
+fi
+
+cat << EOF
+Puedes comprobar tus puntos de salud escribiendo:
+
+echo \$HP
+
+EOF
+mv ../../.capilla ../../capilla 2>/dev/null
+mv ../../.camara-acorazada ../../camara-acorazada 2>/dev/null
+mv ../../.fragmento ../../fragmento 2>/dev/null
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Vaya, no ha funcionado.
+# Recuerda que los ficheros que terminan en * son aplicaciones.
+# Prueba esto:
+#
+# ./pocion

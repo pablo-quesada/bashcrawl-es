@@ -1,0 +1,329 @@
+#!/bin/bash
+#
+# Si estás leyendo esto, has traspasado los límites y estás leyendo el código
+# que hace funcionar este juego.
+#
+#                                 ¡Felicidades!                               
+#
+# La curiosidad juega un papel fundamental en el aprendizaje de Linux, así que
+# prueba a leer este código y averiguar qué hace.
+#
+# En cualquier caso, para continuar jugando, déjate guiar por los pergaminos.
+# Si te quedas atascado, ve a GitHub y crea un issue. Estaremos encantados de
+# darte pistas.
+#
+
+cat << EOF
+En una esquina hay un viejo altar de algún dios olvidado.
+
+Hay un pequeño amuleto en el suelo. Parece un objeto religioso.
+
+EOF
+printf "¿Quieres poner el amuleto en el altar? s/n  "
+read RESP
+
+if [ "$RESP" = "s" -o "$RESP" = "S" ]; then
+    cat << EOF
+Colocas el amuleto sobre el altar. 
+Sientes una suave brisa pasar por la habitación.
+
+EOF
+    touch .bendicion
+else
+    printf "¿Quieres quedarte el amuleto? s/n  "
+    read RESP
+    if [ "$RESP" = "s" -o "$RESP" = "S" ]; then
+        echo "¡Recuerda añadir el amuleto a tu inventario!"
+        touch .maldicion
+    else
+        cat << EOF
+Dejas el amuleto donde está. Sientes que un gran pesar inunda la habitación.
+Será mejor que sigas adelante.
+
+EOF
+
+        touch .maldicion
+   fi
+fi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Vaya, no ha funcionado.
+# Recuerda que los ficheros que terminan en * son aplicaciones.
+# Prueba esto:
+#
+# ./altar
+#
+# Si no ves el * después del nombre del fichero, posiblemente te hayas
+# olvidado de usar ls -F

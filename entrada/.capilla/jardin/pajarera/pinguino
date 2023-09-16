@@ -1,0 +1,530 @@
+#!/bin/bash
+#
+# Si estás leyendo esto, has traspasado los límites y estás leyendo el código
+# que hace funcionar este juego.
+#
+#                                 ¡Felicidades!                               
+#
+# La curiosidad juega un papel fundamental en el aprendizaje de Linux, así que
+# prueba a leer este código y averiguar qué hace.
+#
+# En cualquier caso, para continuar jugando, déjate guiar por los pergaminos.
+# Si te quedas atascado, ve a GitHub y crea un issue. Estaremos encantados de
+# darte pistas.
+#
+
+
+gameover () {
+    cat << EOF > cadaver
+El cadáver de un aventurero yace en el suelo de las mazmorras. Entre sus
+pertenencias encuentras:
+
+${I}
+
+EOF
+    curr=`basename $PWD`
+    while [ "$curr" != "entrada" ]; do
+        pushd .. &> /dev/null
+        dirs -c
+        curr=`basename $PWD`
+    done
+    unset I
+    unset HP
+    $SHELL
+}
+
+penguin_bite () {
+    cat << EOF
+El pingüino muerde tu bolsa, esperando encontrar algo que llevarse a la boca.
+Al no encontrar nada, da un mordisco a tu mano, causándote 1 punto de daño
+(let "HP=HP-1").
+Puedes evitar este daño si tienes una espada y deseas atacar al pingüino.
+
+EOF
+printf "¿Quieres atacar al pingüino? s/n  "
+	read RESP
+	if [ "$RESP" = "s" -o "$RESP" = "S" ]; then
+        cat << EOF
+Atacas al pingüino, acabando rápidamente con él de un solo tajazo.
+Esto atrae la atención de los demás pingüinos en la sala.
+Se unen y lanzan un ataque contra ti, obligándote a luchar con todas tus
+fuerzas.
+
+EOF
+        let HP=HP-5
+        export HP
+        if [ "$HP" -le 0 ]; then
+            cat << EOF
+
+La masa de pingüinos te deja sin puntos de vida. Has sido derrotado.
+
+EOF
+            gameover
+            exit 1
+        else
+            cat << EOF
+Pero un grupo de pingüinos no tolera la opresión hacia los suyos, y
+rápidamente te ves congelado dentro de un bloque de hielo.
+Permaneces aquí, perfectamente conservado durante 128 años.
+Cuando por fin te descongelas, puedes continuar con tu aventura.
+
+EOF
+        fi
+	else
+        let HP=HP--
+        export HP
+	    echo "Lo piensas unos instantes, y decides no arremeter contra el pingüino."
+	fi
+}
+
+cat << EOF
+Uno de los párajos nota tu presencia. Gira la cabeza hacia ti, como si te
+estuviera invitando a acercarte.
+
+EOF
+printf "¿Te acercas? s/n  "
+read RESP
+
+if [ "$RESP" = "s" -o "$RESP" = "S" ]; then
+    cat << EOF
+Das un paso al frente, y el párajo se abalanza hacia ti, con su boca bien
+abierta.  
+
+EOF
+    printf "¿Tienes un pez? s/n  "
+    read RESP
+
+    if [ "$RESP" = "s" -o "$RESP" = "S" ]; then
+        if grep  --quiet --only-matching pez <<< $I; then
+            cat << EOF
+
+Lanzas el pez al pingüino, quien lo atrapa en el aire y lo engulle de golpe.
+
+Recuerda quitar el pez de tu inventario. Prueba el siguiente comando:
+
+export I=\$(sed "s/pez//; s/,,/,/" <<< \$I)
+
+EOF
+        else
+            echo "¡No llevas encima ningún pez!"
+            echo
+            penguin_bite
+        fi
+   else
+        penguin_bite
+   fi
+else
+    cat << EOF
+Lentamente, decides alejarte del pingüino. Pierde el interés en ti y comienza
+a deambular.
+
+EOF
+
+fi
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+##
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+
+#
+# Vaya, no ha funcionado.

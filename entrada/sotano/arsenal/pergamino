@@ -1,0 +1,19 @@
+
+# Puedes interactuar con los objetos de la habitación (terminan en *) si los
+# ejecutas como un comando (un script de shell).
+#
+# Por ejemplo, para recoger un tesoro:
+#
+# ./tesoro
+# 
+# El . (punto) significa *no te muevas*, y el nombre del script hace que se
+# ejecute el código que hace funcionar el juego. Esto se conoce como ruta
+# relativa, representando el . la habitación (directorio) actual.
+# 
+# ¿Te has dejado un tesoro en la habitación anterior? Puedes moverte a un
+# directorio anterior con dos puntos, que significa *dar un paso atrás*.
+#
+# 
+# EJEMPLO:
+#
+# cd ..

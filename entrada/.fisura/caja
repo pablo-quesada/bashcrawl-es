@@ -1,0 +1,341 @@
+#!/bin/bash
+#
+# Si estás leyendo esto, has traspasado los límites y estás leyendo el código
+# que hace funcionar este juego.
+#
+#                                 ¡Felicidades!                               
+#
+# La curiosidad juega un papel fundamental en el aprendizaje de Linux, así que
+# prueba a leer este código y averiguar qué hace.
+#
+# En cualquier caso, para continuar jugando, déjate guiar por los pergaminos.
+# Si te quedas atascado, ve a GitHub y crea un issue. Estaremos encantados de
+# darte pistas.
+#
+
+cat << EOF
+Una caja metálica yace en el suelo.
+Parece que una luz emana de su interior.
+Hay una ventana en la caja.
+La ventana es negra, pero hay una escritura luminiscente.
+
+EOF
+printf "¿Quieres leer la escritura? s/n  "
+read RESP
+
+if [ "$RESP" = "s" -o "$RESP" = "S" ]; then
+    cat << EOF
+
+.-----------------------------------,
+|        Bienvenido a POSIX         |
+|  Introduce tu nombre de usuario:  |
+'-----------------------------------'
+EOF
+   read RESP
+
+   if [ "$RESP" = "$USER" ]; then
+       cat << EOF > armadura
+#!/bin/bash
+cat << eof
+Bienvenido, ${USER}, a tu sistema POSIX.
+Has aprendido mucho en tu viaje, y ya posees el conocimiento necesario para
+convertirte en un gran mago.
+
+Has encontrado una armadura mágica. Anádela a tu inventario.
+
+eof
+touch .armadura
+touch .bendicion
+
+EOF
+        chmod +x armadura
+        echo "Percibes magia a tu alrededor."
+   fi
+else
+    cat << EOF
+Es una caja muy misteriosa, y es mejor no indagar demasiado en lo desconocido.
+
+EOF
+fi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Vaya, no ha funcionado.
+# Recuerda que los ficheros que terminan en * son aplicaciones.
+# Prueba esto:
+#
+# ./caja
+#
+# Si no ves el * después del nombre del fichero, posiblemente te hayas
+# olvidado de usar ls -F 

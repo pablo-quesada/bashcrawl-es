@@ -1,0 +1,505 @@
+#!/bin/bash
+#
+# Si estás leyendo esto, has traspasado los límites y estás leyendo el código
+# que hace funcionar este juego.
+#
+#                                 ¡Felicidades!                               
+#
+# La curiosidad juega un papel fundamental en el aprendizaje de Linux, así que
+# prueba a leer este código y averiguar qué hace.
+#
+# En cualquier caso, para continuar jugando, déjate guiar por los pergaminos.
+# Si te quedas atascado, ve a GitHub y crea un issue. Estaremos encantados de
+# darte pistas.
+#
+
+floors=666
+countdown () {
+	var=${floors}
+	len=${#var} 
+	echo -n $var
+    let m=var-1
+	for t in `seq ${m} -1 1`
+	do
+		sleep 0.1
+		for i in `seq ${len} -1 1`
+		do
+			echo -ne '\b'
+		done
+		if [ $len -gt ${#t} ]
+		then
+            let l=len-1
+			for n in `seq ${l} -1 ${#t}`
+			do
+				echo -n '0'
+			done
+		fi
+		echo -n $t
+	done
+}
+
+
+countup () {
+	var=${floors}
+	for t in `seq 1 ${var}`
+	do
+		sleep 0.1
+        len=${#t}
+		for i in `seq 1 ${#var}`
+		do
+			echo -ne '\b'
+		done
+        if [ ${len} -lt ${#var} ]; then
+            let n=${#var}-len
+            for j in `seq 1 ${n}`
+            do
+                echo -ne '0'
+            done
+        fi
+        echo -n $t
+	done
+}
+
+if grep --quiet ARRIBA .direccion; then
+    cat << EOF
+Escuchas un chirrido, y sientes un peso en los pies, con una vaga sensación de
+movimiento.
+
+Una pantalla mágica pone:
+
+EOF
+    countup
+    cat << EOF
+
+Se abren las puertas, mostrando oscuridad a cualquier lado que mires.
+
+EOF
+    echo "ABAJO" > .direccion
+    ln -sf .satelite puerta && \
+        sleep 10 && \
+        echo "Las puertas se cierran." && \
+        rm puerta &> /dev/null && \
+    echo "ABAJO" > .direccion &
+    echo
+else
+    cat << EOF
+Escuchas un chirrido, y sientes los pies ligeros, con una vaga sensación de
+movimiento.
+
+Una pantalla mágica pone:
+
+EOF
+    countdown
+    echo
+    echo
+    echo "ARRIBA" > .direccion &
+    cat << EOF
+Se abren las puertas, mostrando oscuridad a cualquier lado que mires.
+
+EOF
+    sleep 10 && \
+        ln -sf .. door && \
+        echo "Las puertas se cierran." && \
+        rm puerta &> /dev/null &
+    echo
+fi
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# Vaya, no ha funcionado.
+# Recuerda que los ficheros que terminan en * son aplicaciones.
+# Prueba esto:
+#
+# ./pantalla
+#
+# Si no ves el * después del nombre del fichero, posiblemente te hayas
+# olvidado de usar ls -F

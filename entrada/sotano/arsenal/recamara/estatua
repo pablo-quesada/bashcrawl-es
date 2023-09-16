@@ -1,0 +1,430 @@
+#!/bin/bash
+#
+# Si estás leyendo esto, has traspasado los límites y estás leyendo el código
+# que hace funcionar este juego.
+#
+#                                 ¡Felicidades!                               
+#
+# La curiosidad juega un papel fundamental en el aprendizaje de Linux, así que
+# prueba a leer este código y averiguar qué hace.
+#
+# En cualquier caso, para continuar jugando, déjate guiar por los pergaminos.
+# Si te quedas atascado, ve a GitHub y crea un issue. Estaremos encantados de
+# darte pistas.
+#
+
+gameover () {
+    cat << EOF > cadaver
+El cadáver de un aventurero yace en el suelo de las mazmorras. Entre sus
+pertenencias encuentras:  
+
+$I
+
+EOF
+    curr=`basename $PWD`
+    while [ "$curr" != "entrada" ]; do
+        pushd .. &> /dev/null
+        dirs -c
+        curr=`basename $PWD`
+    done
+    unset I
+    unset HP
+    $SHELL
+}
+
+# this runs after the statue has been "destroyed"
+# and this file has been renamed to 'pieces'
+if [ "$0" = "./pedazos" ]; then
+    cat << EOF
+Rebuscas entre los pedazos de una estatua destrozada.
+
+No encuentras nada de interés.
+
+EOF
+    exit 1
+fi
+
+# start the statue encounter
+cat << EOF
+Una imponente estatua yace en la esquina de la habitación.
+
+EOF
+printf "¿Te acercas a ella? s/n  "
+
+read RESP
+
+if [ "$RESP" = "s" -o "$RESP" = "S" ]; then
+    cat << EOF
+La estatua cobra vida, retumbando:
+
+¿QUIÉN OSA ENTRAR EN LA RECÁMARA DE LOS ESPÍRITUS?
+
+Lanza su puño hacia ti, golpeándote y causándote 5 puntos de daño.
+
+EOF
+
+    # this does not change the user's HP,
+    # it only calculates it after damage
+    let "HP=HP-5"
+    if [ "$HP" -le 0 ]; then
+        cat << EOF
+Has sido asesinado por la estatua.
+
+¡FIN DEL JUEGO!
+
+EOF
+        gameover
+        exit 1
+    fi
+
+    perl -pe 's/monedas/diamantes/' -i ./tesoro
+    printf "¿Tienes una espada? s/n  "
+    read RESP
+    if [ "$RESP" = "s" -o "$RESP" = "S" ]; then
+       if grep  --quiet --only-matching 'espada' <<< $I; then
+           cat <<EOF
+¡Golpeas a la estatua y esta se hace añicos!
+
+Desgraciadamente, también has recibido daño. Quita 5 puntos de vida a tu
+variable HP:
+
+let "HP=HP-5"
+
+EOF
+           mv estatua pedazos
+       else
+           cat << EOF
+¡No tienes una espada! ¡Corre!
+La estatua te ha atacado, alcanzándote y causándote daño.
+Quita 5 puntos de vida a tu variable HP:
+
+let "HP=HP-5"
+
+EOF
+           rm tesoro
+           rm hechizo
+      fi
+    else
+        cat <<EOF
+¡Corre!
+La estatua te ha atacado, alcanzándote y causándote daño.
+Quita 5 puntos de vida a tu variable HP:
+
+let "HP=HP-5"
+
+EOF
+   fi
+else
+    cat << EOF
+Por precaución, decides ignorar la estatua, recordando historias de piedras
+malditas que acechan en la profundidad de las mazmorras.
+
+EOF
+
+fi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Vaya, no ha funcionado.
+# Recuerda que los ficheros que terminan en * son aplicaciones.
+# Prueba esto:
+#
+# ./estatua
