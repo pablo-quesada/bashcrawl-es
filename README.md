@@ -14,7 +14,7 @@ Para comenzar a jugar, abre una terminal.
 Escribe este comando y presiona la tecla _Enter_ para descargar el juego:
 
 ```
-git clone https://github.com/alvrogd/bashcrawl-es.git
+git clone https://github.com/pablo-quesada/bashcrawl-es
 ```
 
 Ejecuta el siguiente comando para entrar al juego:
