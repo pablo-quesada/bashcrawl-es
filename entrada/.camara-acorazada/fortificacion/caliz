@@ -32,7 +32,7 @@ read RESP
 
 if [ "$RESP" = "s" -o "$RESP" = "S" ]; then
     cat << EOF
-Prueba a buscar en opensource.com indicaciones sobre cómo copiar ficheros.
+Prueba a preguntar a otro/a aventurero/a indicaciones sobre cómo copiar ficheros.
 
 EOF
     printf "¿Todavía estás atascado? Te puedo dar la respuesta s/n  "
